@@ -17,10 +17,11 @@ namespace Domain.Entities
 
         [Required(ErrorMessage = "Имя должно быть установлено")]
         [Display(Name = "Наименование")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина имени должна быть от 3 до 50 символов")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Дата на мероприятие не может быть пустой")]
-        [Column(TypeName = "date")]
+        [Column(TypeName = "Date")]
         [Display(Name = "Дата")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]//Тут исправить
         public DateTime Date { get; set; }

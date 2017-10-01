@@ -31,7 +31,17 @@
             }
         </tbody>
     </table>
-    <a href="@Url.Action("RegisterOnEvent",new { id = Model.Id })" class="btn btn-block btn-lg btn-success">
-        <span class="glyphicon glyphicon-thumbs-up"></span> Зарегистрироваться на мероприятие
-    </a>
+    @if (Model.CountPeople > Model.ReservedPeople)
+    {
+        <a href="@Url.Action("RegisterOnEvent", new { id = Model.Id })" class="btn btn-block btn-lg btn-success">
+            <span class="glyphicon glyphicon-thumbs-up"></span> Зарегистрироваться на мероприятие
+        </a>
+    }
+    else
+    {
+        <a href="#" class="btn btn-block btn-lg btn-warning">
+            <span class="glyphicon glyphicon-user"></span> Регистрация на мероприятие завернено
+        </a>
+    }
+
 </div>

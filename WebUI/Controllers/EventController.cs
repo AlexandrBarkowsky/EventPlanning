@@ -66,19 +66,30 @@ namespace WebUI.Controllers
         public ActionResult CreateEvent(Event Event) {
             if (ModelState.IsValid)
             {
-                repository.SaveEvent(Event);
-                TempData["message"] = string.Format("Мероприятие \"{0}\" было добавлено", Event.Name);
-                return RedirectToAction("Index");
+                if (Event.Date.CompareTo(DateTime.Now) == 1)
+                {
+                
+                    repository.SaveEvent(Event);
+                    TempData["message"] = string.Format("Мероприятие \"{0}\" было добавлено", Event.Name);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("date", "Ошибка введения даты, она не может быть раньше теперешней");
+                    return View(Event);
+                }
             }
-            else {
-                return View(Event);
-            }
+            return View(Event);
         }
         [HttpGet]
         public ActionResult RegisterOnEvent(int id) {
             Event getEvent = repository.Events.Where(c => c.Id == id).FirstOrDefault();// Загружаем событие
             if (getEvent != null) {
-                return View(new RegisterOnEvent { EventId = id});
+                if (getEvent.CountPeople > getEvent.ReservedPeople) {
+                    return View(new RegisterOnEvent { EventId = id});
+                }
+                TempData["message"] = "Регистрация на мероприятие завершено!";
+                return RedirectToAction("Index");
             }
             return HttpNotFound();
         }
@@ -127,15 +138,15 @@ namespace WebUI.Controllers
         }
 
         public ActionResult ConfirmEmail(string Token, string Email) {
-            RegisterOnEvent user = repository.RegisterInEvent.Where(m => m.Token == Token).FirstOrDefault();
+            RegisterOnEvent user = repository.RegisterInEvent.Where(m => m.Token == Token).Where(m=>m.Email == Email).FirstOrDefault();
             if (user != null) {
-                if (user.Email == Email) {
-                    repository.SaveConfirmedEmail(user);
-                    TempData["message"] = string.Format("Вы успешно подтвердили свою регистрацию на мероприятие: {0} {1}",user.FirstName,user.LastName);
-                    return RedirectToAction("Index");
-                }
-                TempData["message"] = string.Format("Произошла ошибка");
-                return RedirectToAction("Index");
+                 user.EmailConfirmed = true;
+                 repository.Update(user);
+                 Event EventObj = repository.Events.Where(m => m.Id == user.EventId).FirstOrDefault();
+                 EventObj.ReservedPeople++;
+                 repository.UpdateReservedPeople(EventObj);
+                 TempData["message"] = string.Format("Вы успешно подтвердили свою регистрацию на мероприятие: {0} {1}",user.FirstName,user.LastName);
+                 return RedirectToAction("Index");
             }
             TempData["message"] = string.Format("Произошла ошибка");
             return RedirectToAction("Index");

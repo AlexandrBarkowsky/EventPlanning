@@ -24,3 +24,6 @@ C:\Users\Александр\Documents\Visual Studio 2017\Projects\EventPlanning\
 C:\Users\Александр\documents\visual studio 2017\Projects\EventPlanning\Domain\obj\Debug\Domain.Migrations._2.resources
 C:\Users\Александр\documents\visual studio 2017\Projects\EventPlanning\Domain\obj\Debug\Domain.csproj.GenerateResource.Cache
 C:\Users\Александр\documents\visual studio 2017\Projects\EventPlanning\Domain\obj\Debug\Domain.Migrations._4.resources
+C:\Users\Александр\documents\visual studio 2017\Projects\EventPlanning\Domain\obj\Debug\Domain.Migrations.addvalidationstring.resources
+C:\Users\Александр\documents\visual studio 2017\Projects\EventPlanning\Domain\obj\Debug\Domain.Migrations.addvalidationmodel.resources
+C:\Users\Александр\documents\visual studio 2017\Projects\EventPlanning\Domain\obj\Debug\Domain.Migrations.newvalidationmodel.resources

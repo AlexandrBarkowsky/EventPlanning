@@ -1,7 +1,7 @@
 ﻿@model Domain.Entities.Event
 
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = "Информация о мероприятии" + Model.Name;
 }
 @Html.Partial("EventInfo", Model)
 

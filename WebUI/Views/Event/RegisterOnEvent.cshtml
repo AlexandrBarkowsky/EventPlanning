@@ -1,6 +1,6 @@
 ﻿@model Domain.Entities.RegisterOnEvent
 @{
-    ViewBag.Title = "RegisterInEvent";
+    ViewBag.Title = "Регистрация на мероприятие ";
 }
 
 <h2 class="text-center">Регистрация на мероприятие</h2>
@@ -24,8 +24,9 @@
                 @Html.LabelFor(m => m.LastName)
                 @Html.TextBoxFor(m => m.LastName, null, new { @class = "form-control" })
 
-                <input type="submit" value="Зарегестрироваться" class="btn btn-primary" />
+                
             </div>
+            <input type="submit" value="Зарегестрироваться" class="btn btn-primary" />
         </div>
     </div>
 }

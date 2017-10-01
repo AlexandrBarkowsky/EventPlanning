@@ -33,11 +33,14 @@ namespace Domain.Concrete
             context.SaveChanges();
             return true;
         }
-
-        public bool SaveConfirmedEmail(RegisterOnEvent user) {
-            user.EmailConfirmed = true;
+        public void Update(RegisterOnEvent user) {
+            context.Entry(user).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
-            return true;
+        }
+        public void UpdateReservedPeople(Event Event)
+        {
+            context.Entry(Event).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }
