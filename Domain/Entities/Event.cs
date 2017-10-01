@@ -21,7 +21,7 @@ namespace Domain.Entities
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Дата на мероприятие не может быть пустой")]
-        [Column(TypeName = "date")]
+        [Column(TypeName = "Date")]
         [Display(Name = "Дата")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]//Тут исправить
         public DateTime Date { get; set; }

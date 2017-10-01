@@ -4,7 +4,8 @@
 
 <tr>
     <td>@Html.ActionLink(@Model.Name,"Info",new { id = Model.Id})</td>
-    <td>@Model.Date</td>
+    <td>@Model.Date.ToString("dd MMMM yyyy")</td>
+    
     <td>@Model.Time</td>
     <td>
         <div class="progress" style="margin-bottom: 0px;">
