@@ -84,6 +84,18 @@
     <Compile Include="Migrations\201710011251057_4.Designer.cs">
       <DependentUpon>201710011251057_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710011828075_add validation string.cs" />
+    <Compile Include="Migrations\201710011828075_add validation string.Designer.cs">
+      <DependentUpon>201710011828075_add validation string.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710011834370_add validation model.cs" />
+    <Compile Include="Migrations\201710011834370_add validation model.Designer.cs">
+      <DependentUpon>201710011834370_add validation model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710011841049_new validation model.cs" />
+    <Compile Include="Migrations\201710011841049_new validation model.Designer.cs">
+      <DependentUpon>201710011841049_new validation model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,6 +109,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710011251057_4.resx">
       <DependentUpon>201710011251057_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710011828075_add validation string.resx">
+      <DependentUpon>201710011828075_add validation string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710011834370_add validation model.resx">
+      <DependentUpon>201710011834370_add validation model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710011841049_new validation model.resx">
+      <DependentUpon>201710011841049_new validation model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
