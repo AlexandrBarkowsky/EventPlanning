@@ -7,25 +7,17 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using System.Net.Mail;
 using System.Net;
+using System.Web.Configuration;
 
 namespace Domain.Concrete
 {
-    public class EmailSettings
-    {
-        public string MailFromAddress = "sdasdas12321@gmail.com";
-        public string Username = "sdasdas12321@gmail.com";
-        public string Password = "123aallalala";
-        public string ServerName = "smtp.gmail.com";
-        public int ServerPort = 587;
-    }
     public class EmailProcessor : ISendEmail
     {
-        private EmailSettings emailSettings = new EmailSettings();
         public void SendMail(string email, string subject, string body)
         {
             //тут реализовать отправку сообщения email - кому, субъет - тема, боди - тело сообщения
             // отправитель - устанавливаем адрес и отображаемое в письме имя
-            MailAddress from = new MailAddress(emailSettings.MailFromAddress, "Alexandr");
+            MailAddress from = new MailAddress(WebConfigurationManager.AppSettings["MailFromAddress"], "Alexandr");
             // кому отправляем
             MailAddress to = new MailAddress(email);
             // создаем объект сообщения
@@ -37,9 +29,9 @@ namespace Domain.Concrete
             // письмо представляет код html
             m.IsBodyHtml = true;
             // адрес smtp-сервера и порт, с которого будем отправлять письмо
-            SmtpClient smtp = new SmtpClient(emailSettings.ServerName, emailSettings.ServerPort);
+            SmtpClient smtp = new SmtpClient(WebConfigurationManager.AppSettings["ServerName"], Int32.Parse(WebConfigurationManager.AppSettings["ServerPort"]));
             // логин и пароль
-            smtp.Credentials = new NetworkCredential(emailSettings.Username, emailSettings.Password);
+            smtp.Credentials = new NetworkCredential(WebConfigurationManager.AppSettings["Username"], WebConfigurationManager.AppSettings["Password"]);
             smtp.EnableSsl = true;
             smtp.Send(m);
         }
