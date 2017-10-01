@@ -15,6 +15,7 @@ namespace Domain.Abstract
         Event GetAllEventValue(Event eventObj);
         bool SaveEvent(Event Event);
         bool SaveRegisterUser(RegisterOnEvent user);
-        bool SaveConfirmedEmail(RegisterOnEvent user);
+        void Update(RegisterOnEvent user);
+        void UpdateReservedPeople(Event Event);
     }
 }

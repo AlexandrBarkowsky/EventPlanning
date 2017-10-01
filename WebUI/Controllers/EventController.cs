@@ -127,15 +127,15 @@ namespace WebUI.Controllers
         }
 
         public ActionResult ConfirmEmail(string Token, string Email) {
-            RegisterOnEvent user = repository.RegisterInEvent.Where(m => m.Token == Token).FirstOrDefault();
+            RegisterOnEvent user = repository.RegisterInEvent.Where(m => m.Token == Token).Where(m=>m.Email == Email).FirstOrDefault();
             if (user != null) {
-                if (user.Email == Email) {
-                    repository.SaveConfirmedEmail(user);
-                    TempData["message"] = string.Format("Вы успешно подтвердили свою регистрацию на мероприятие: {0} {1}",user.FirstName,user.LastName);
-                    return RedirectToAction("Index");
-                }
-                TempData["message"] = string.Format("Произошла ошибка");
-                return RedirectToAction("Index");
+                 user.EmailConfirmed = true;
+                 repository.Update(user);
+                 Event EventObj = repository.Events.Where(m => m.Id == user.EventId).FirstOrDefault();
+                 EventObj.ReservedPeople++;
+                 repository.UpdateReservedPeople(EventObj);
+                 TempData["message"] = string.Format("Вы успешно подтвердили свою регистрацию на мероприятие: {0} {1}",user.FirstName,user.LastName);
+                 return RedirectToAction("Index");
             }
             TempData["message"] = string.Format("Произошла ошибка");
             return RedirectToAction("Index");
