@@ -1,0 +1,31 @@
+﻿@model Domain.Entities.RegisterOnEvent
+@{
+    ViewBag.Title = "RegisterInEvent";
+}
+
+<h2 class="text-center">Регистрация на мероприятие</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div class="container">
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.HiddenFor(m => m.EventId)
+
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, null, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, null, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, null, new { @class = "form-control" })
+
+                <input type="submit" value="Зарегестрироваться" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}

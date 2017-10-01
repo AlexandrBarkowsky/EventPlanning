@@ -1,0 +1,73 @@
+﻿@model Domain.Entities.Event
+@{
+    ViewBag.Title = "Создать мероприятие";
+}
+
+<h2 class="text-center">Создать новое мероприятие</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="container"> 
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.ValidationSummary(true)
+
+
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control", @placeholder = "Введите название" })
+
+
+
+                @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Date)
+                @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control" , @placeholder = "день.месяц.год"} })
+
+
+                @Html.ValidationMessageFor(m => m.Time, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.Time)
+                @Html.EditorFor(m => m.Time, new { htmlAttributes = new { @class = "form-control" , @placeholder = "часы:минуты"} })
+
+
+                @Html.ValidationMessageFor(m => m.CountPeople, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.CountPeople)
+                @Html.EditorFor(m => m.CountPeople, new { htmlAttributes = new { @class = "form-control" } })
+
+                <div class="row" id="insertCollectionAttribute">
+                    @if (Model.EventsValue.Any())
+                    {
+                        for (int i = 0; i < Model.EventsValue.Count; i++)
+                        {
+
+                            <div class="col-sm-6">
+                                <label>Название поля</label>
+                                @Html.TextBox("EventsValue[" + i + "].AttrName", Model.EventsValue.ElementAt(i).AttrName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Значение поля</label>
+                                @Html.TextBox("EventsValue[" + i + "].AttrValue", Model.EventsValue.ElementAt(i).AttrValue, new { @class = "form-control" })
+                            </div>
+                        }
+                    }
+
+                </div>
+
+            </div>
+            <script>
+            var id = @Model.EventsValue.Count;
+            $(document).ready(function () {
+                $("#btnAdd").click(function () {
+                    $('#insertCollectionAttribute')
+                        .append('<div class="col-sm-6"><label> Название поля</label><input class="input-validation-error form-control" id="AttrValue' + id + '__AttrName" name="EventsValue[' + id + '].AttrName" value="" type="text"></div>')
+                        .append('<div class="col-sm-6"><label> Значения поля</label><input class="input-validation-error form-control" id="AttrValue' + id + '__GridValue" name="EventsValue[' + id + '].AttrValue" value="" type="text"></div>');
+                    id++;
+                });
+            });
+            </script>
+            <button type="button" id="btnAdd" class="btn btn-primary">Добавить дополнительно поле</button>
+            <input type="submit" value="Добавить мероприятие" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+

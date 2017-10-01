@@ -1,0 +1,14 @@
+﻿@model Domain.Entities.Event
+@using WebUI.HtmlHelpers
+
+
+<tr>
+    <td>@Html.ActionLink(@Model.Name,"Info",new { id = Model.Id})</td>
+    <td>@Model.Date</td>
+    <td>@Model.Time</td>
+    <td>
+        <div class="progress" style="margin-bottom: 0px;">
+            @Html.ProgressBar(Model.ReservedPeople, Model.CountPeople)
+        </div>
+    </td>
+</tr>

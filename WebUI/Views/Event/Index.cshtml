@@ -1,0 +1,45 @@
+﻿@using WebUI.Models
+@using WebUI.HtmlHelpers
+@model EventListViewModel
+
+@{
+    ViewBag.Title = "Список мероприятий";
+}
+
+
+
+<h2 class="text-center">Список всех мероприятий</h2>
+
+<div class="container">
+        @if (Model.Events.Any())
+        {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Название мероприятия</th>
+                        <th>Дата начала</th>
+                        <th>Время начала</th>
+                        <th>Количество занятых мест</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in @Model.Events)
+                    {
+                        @Html.Partial("EventSummary", p)
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <h2>Мероприятия отсутствуют</h2>
+    }
+    <div>
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
+    </div>
+    @Html.ActionLink("Добавить мероприятие", "CreateEvent", null,
+            new { @class = "btn btn-default pull-right" })
+</div>
+
