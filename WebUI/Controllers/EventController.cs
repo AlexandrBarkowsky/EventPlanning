@@ -66,13 +66,20 @@ namespace WebUI.Controllers
         public ActionResult CreateEvent(Event Event) {
             if (ModelState.IsValid)
             {
-                repository.SaveEvent(Event);
-                TempData["message"] = string.Format("Мероприятие \"{0}\" было добавлено", Event.Name);
-                return RedirectToAction("Index");
+                if (Event.Date.CompareTo(DateTime.Now) == 1)
+                {
+                
+                    repository.SaveEvent(Event);
+                    TempData["message"] = string.Format("Мероприятие \"{0}\" было добавлено", Event.Name);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("date", "Ошибка введения даты, она не может быть раньше теперешней");
+                    return View(Event);
+                }
             }
-            else {
-                return View(Event);
-            }
+            return View(Event);
         }
         [HttpGet]
         public ActionResult RegisterOnEvent(int id) {
