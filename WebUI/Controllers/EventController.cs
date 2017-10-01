@@ -78,7 +78,11 @@ namespace WebUI.Controllers
         public ActionResult RegisterOnEvent(int id) {
             Event getEvent = repository.Events.Where(c => c.Id == id).FirstOrDefault();// Загружаем событие
             if (getEvent != null) {
-                return View(new RegisterOnEvent { EventId = id});
+                if (getEvent.CountPeople > getEvent.ReservedPeople) {
+                    return View(new RegisterOnEvent { EventId = id});
+                }
+                TempData["message"] = "Регистрация на мероприятие завершено!";
+                return RedirectToAction("Index");
             }
             return HttpNotFound();
         }
